@@ -24,10 +24,10 @@ def remove_noise_by_pixel(img, column, line, pass_factor):
 
 
 if __name__=="__main__":
-    # input_image = sys.argv[1]
-    input_image = 'AAA.png'
+    input_image = sys.argv[1]
+    # input_image = 'AAA.png'
     output_image = 'out_' + input_image
-    pass_factor = int(sys.argv[1])
+    pass_factor = int(sys.argv[2])
 
     img = Image.open(input_image)
     img = prepare_image(img)
