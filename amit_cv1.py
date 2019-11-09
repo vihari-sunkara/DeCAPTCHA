@@ -16,6 +16,6 @@ cv.imshow('Erosion', img_erosion)
 cv.imshow('img',img)
 cv.imshow('mask',mask)
 #cv.imshow('res',res)
-cv.imshow('edge', out_l) 
+cv.imshow('edge', out_l)  # this one may not be compulsary if we do segmentation by some other method.
 cv.waitKey(0)
 cv.destroyAllWindows()
