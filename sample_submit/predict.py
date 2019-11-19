@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 from keras.models import Model, load_model
-from sklearn.preprocessing import LabelBinarizer
+from sklearn import preprocessing
 
 # DO NOT CHANGE THE NAME OF THIS METHOD OR ITS INPUT OUTPUT BEHAVIOR
 
@@ -39,6 +39,8 @@ def decaptcha( filenames ):
             letter_image = np.expand_dims(letter_image, axis=2)
             letter_image = np.expand_dims(letter_image, axis=0)
             pred = model.predict(letter_image)
+            alpha=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+            lb = preprocessing.LabelBinarizer().fit(alpha)
             letter = lb.inverse_transform(pred)[0]
             predictions.append(letter)
         codes.append("".join(predictions))

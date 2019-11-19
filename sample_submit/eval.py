@@ -29,7 +29,7 @@ def getCodeMatchScore( codes, goldCodes ):
         totScore += getLCS( codes[i], goldCodes[i] ) / len( goldCodes[i] )
     return totScore
 
-numTest = 2
+numTest = 3
 filepaths = [ "test/image%d.png" % i for i in range( numTest ) ]
 file = open( "test/codes.txt", "r" )
 goldCodes = file.read().splitlines()
@@ -39,6 +39,8 @@ goldNumChars = np.array( [ len( goldCodes[i] ) for i in range( len( goldCodes ) 
 # Get recommendations from predict.py and time the thing
 tic = tm.perf_counter()
 (numChars, codes) = predict.decaptcha( filepaths )
+print(numChars)
+print(codes)
 toc = tm.perf_counter()
 
 print( "Total time taken is %.6f seconds " % (toc - tic) )
