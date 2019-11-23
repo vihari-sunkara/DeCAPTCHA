@@ -26,7 +26,7 @@ def decaptcha( filenames ):
         upper_p =np.array([255,255,255])
         mask=cv2.inRange(hsv, lower_p, upper_p)
         thresh = cv2.threshold(mask, 127, 255, cv2.THRESH_BINARY_INV, cv2.THRESH_OTSU)[1]
-        contours, _ = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         numChars.append(len(contours))
         letter_image_regions = []
         for contour in contours:
