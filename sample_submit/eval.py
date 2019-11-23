@@ -29,7 +29,7 @@ def getCodeMatchScore( codes, goldCodes ):
         totScore += getLCS( codes[i], goldCodes[i] ) / len( goldCodes[i] )
     return totScore
 
-numTest = 100
+numTest = 1999
 filepaths = [ "test/img%d.png" % (i+1) for i in range( numTest ) ]
 file = open( "test/codes.txt", "r" )
 goldCodes = file.read().splitlines()

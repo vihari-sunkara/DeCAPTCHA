@@ -1,5 +1,5 @@
 import numpy as np
-import cv2
+import cv2,keras
 from keras.models import Model, load_model
 from sklearn import preprocessing
 
@@ -15,10 +15,11 @@ from sklearn import preprocessing
 
 def decaptcha( filenames ):
     # The use of a model file is just for sake of illustration
+    keras.backend.set_learning_phase(0)
     numChars=[]
     codes=[]
+    model = load_model('model-tgs-salt-1.h5py')
     for filepath in filenames:
-        model = load_model('model-tgs-salt-1.h5')
         image = cv2.imread(filepath)
         hsv= cv2.cvtColor(image,cv2.COLOR_BGR2HSV)
         lower_p = np.array([0,0,150])
