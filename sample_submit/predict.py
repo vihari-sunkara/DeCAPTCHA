@@ -2,7 +2,7 @@ import numpy as np
 import cv2,keras
 from keras.models import Model, load_model
 from sklearn import preprocessing
-
+import time as tm
 # DO NOT CHANGE THE NAME OF THIS METHOD OR ITS INPUT OUTPUT BEHAVIOR
 
 # INPUT CONVENTION
@@ -18,7 +18,10 @@ def decaptcha( filenames ):
     keras.backend.set_learning_phase(0)
     numChars=[]
     codes=[]
-    model = load_model('model-tgs-salt-1.h5py')
+    tic = tm.perf_counter()
+    model = load_model('model.txt')
+    toc = tm.perf_counter()
+    print( "Total time taken is %.6f seconds " % (toc - tic) )
     for filepath in filenames:
         image = cv2.imread(filepath)
         hsv= cv2.cvtColor(image,cv2.COLOR_BGR2HSV)
@@ -26,7 +29,7 @@ def decaptcha( filenames ):
         upper_p =np.array([255,255,255])
         mask=cv2.inRange(hsv, lower_p, upper_p)
         thresh = cv2.threshold(mask, 127, 255, cv2.THRESH_BINARY_INV, cv2.THRESH_OTSU)[1]
-        contours, hierarchy = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         numChars.append(len(contours))
         letter_image_regions = []
         for contour in contours:
