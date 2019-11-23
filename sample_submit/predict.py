@@ -18,7 +18,7 @@ def decaptcha( filenames ):
     keras.backend.set_learning_phase(0)
     numChars=[]
     codes=[]
-    model = load_model('model-tgs-salt-1.h5py')
+    model = load_model('model-tgs-salt-1.h5')
     for filepath in filenames:
         image = cv2.imread(filepath)
         hsv= cv2.cvtColor(image,cv2.COLOR_BGR2HSV)
@@ -26,7 +26,7 @@ def decaptcha( filenames ):
         upper_p =np.array([255,255,255])
         mask=cv2.inRange(hsv, lower_p, upper_p)
         thresh = cv2.threshold(mask, 127, 255, cv2.THRESH_BINARY_INV, cv2.THRESH_OTSU)[1]
-        contours, hierarchy = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        _, contours, _ = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         numChars.append(len(contours))
         letter_image_regions = []
         for contour in contours:
